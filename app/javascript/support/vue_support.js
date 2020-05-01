@@ -231,6 +231,12 @@ export default {
     date_to_wday(t) {
       return dayjs(t).format("ddd")
     },
+
+    __assert(value, message = null) {
+      if (!value) {
+        alert(message || "assert error")
+      }
+    }
   },
 
   computed: {

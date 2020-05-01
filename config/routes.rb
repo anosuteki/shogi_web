@@ -23,7 +23,7 @@ Rails.application.routes.draw do
   end
 
   # root "colosseum/battles#index"
-  root "swars/battles#index"
+  root "admin/scripts#show", { id: :acns1_sample }
 
   ################################################################################ Debug
 

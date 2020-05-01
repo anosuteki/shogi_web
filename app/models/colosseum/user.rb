@@ -78,7 +78,7 @@ module Colosseum
             UserMailer.user_created(self).deliver_now
           end
 
-          SlackAgent.message_send(key: "ユーザー登録", body: "#{name}: #{attributes.inspect}")
+          SlackAgent.message_send(key: "ユーザー登録", body: attributes.slice("id", "name"))
         end
       end
 
@@ -113,43 +113,7 @@ module Colosseum
       end
     end
 
-    concerning :ChronicleMethods do
-      included do
-        has_many :chronicles, dependent: :destroy
-
-        if Rails.env.development? && false
-          after_create do
-            rand(10).times do
-              judge_add(JudgeInfo.keys.sample)
-            end
-          end
-        end
-      end
-
-      def win_count
-        chronicles.judge_eq(:win).count
-      end
-
-      def lose_count
-        chronicles.judge_eq(:lose).count
-      end
-
-      def win_ratio
-        if total_count.zero?
-          return 0.0
-        end
-        win_count.fdiv(total_count).round(3)
-      end
-
-      def total_count
-        win_count + lose_count
-      end
-
-      def judge_add(key)
-        judge_info = JudgeInfo.fetch(key)
-        chronicles.create!(judge_key: judge_info.key)
-      end
-    end
+    include UserChronicleMethods
 
     concerning :ProfileMethods do
       included do
@@ -210,13 +174,13 @@ module Colosseum
       end
 
       def cud_broadcast(action)
-        ActionCable.server.broadcast("lobby_channel", user_cud: {action: action, user: ams_sr(self, serializer: OnlineUserSerializer)})
+        # ActionCable.server.broadcast("lobby_channel", user_cud: {action: action, user: ams_sr(self, serializer: OnlineUserSerializer)})
       end
 
       # user.lobby_chat_say("ログインしました", :msg_class => "has-text-info")
       def lobby_chat_say(message, msg_options = {})
         lobby_message = lobby_messages.create!(message: message, msg_options: msg_options)
-        ActionCable.server.broadcast("lobby_channel", lobby_message: ams_sr(lobby_message))
+        # ActionCable.server.broadcast("lobby_channel", lobby_message: ams_sr(lobby_message))
       end
     end
 
@@ -256,7 +220,7 @@ module Colosseum
       end
 
       # FALLBACK_ICONS_DEBUG=1 foreman s
-      def avatar_url
+      def avatar_path
         if ENV["FALLBACK_ICONS_DEBUG"]
           return ActionController::Base.helpers.asset_path(self.class.image_files(:robot).sample)
         end
@@ -288,14 +252,14 @@ module Colosseum
 
       def lobby_in_handle
         update!(joined_at: Time.current)
-        LobbyChannel.broadcast_to(self, {joined_at: joined_at})
-        ActionCable.server.broadcast("lobby_channel", {joined_user_add: ams_sr(self, serializer: Colosseum::OnlineUserSerializer)})
+        # LobbyChannel.broadcast_to(self, {joined_at: joined_at})
+        # ActionCable.server.broadcast("lobby_channel", {joined_user_add: ams_sr(self, serializer: Colosseum::OnlineUserSerializer)})
       end
 
       def lobby_out_handle
         update!(joined_at: nil)
-        LobbyChannel.broadcast_to(self, {joined_at: joined_at})
-        ActionCable.server.broadcast("lobby_channel", {joined_user_remove: ams_sr(self, serializer: Colosseum::OnlineUserSerializer)})
+        # LobbyChannel.broadcast_to(self, {joined_at: joined_at})
+        # ActionCable.server.broadcast("lobby_channel", {joined_user_remove: ams_sr(self, serializer: Colosseum::OnlineUserSerializer)})
       end
 
       def appear
@@ -307,7 +271,7 @@ module Colosseum
       end
 
       def joined_only_count_update
-        ActionCable.server.broadcast("system_notification_channel", {joined_only_count: self.class.joined_only.count})
+        # ActionCable.server.broadcast("system_notification_channel", {joined_only_count: self.class.joined_only.count})
       end
     end
 
@@ -325,7 +289,7 @@ module Colosseum
       end
 
       def fighter_only_count_update
-        ActionCable.server.broadcast("system_notification_channel", {fighter_only_count: self.class.fighter_only.count})
+        # ActionCable.server.broadcast("system_notification_channel", {fighter_only_count: self.class.fighter_only.count})
       end
     end
 

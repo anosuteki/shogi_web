@@ -1,15 +1,19 @@
-/* eslint no-console:0 */
 // This file is automatically compiled by Webpack, along with any other files
 // present in this directory. You're encouraged to place your actual application logic in
 // a relevant structure within app/javascript and only use these pack files to reference
 // that code so it'll be compiled.
-//
-// To reference this file, add <%= javascript_pack_tag 'application' %> to the appropriate
-// layout file, like app/views/layouts/application.html.erb
 
 require("@rails/ujs").start()
 // require("turbolinks").start()
 require("@rails/activestorage").start()
+require("channels")
+
+// Uncomment to copy all static images under ../images to the output folder and reference
+// them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)
+// or the `imagePath` JavaScript helper below.
+//
+// const images = require.context('../images', true)
+// const imagePath = (name) => images(name, true)
 
 import "modulable_crud.js"
 import "global_variable_set.js"
@@ -24,6 +28,11 @@ Vue.use(Vuex)                   // これは一箇所だけで実行すること
 
 import VueRouter from "vue-router"
 Vue.use(VueRouter)
+
+// https://www.npmjs.com/package/vue-dump
+import "vue-dump/dist/vue-dump.css"
+import VueDump from "vue-dump/dist/vue-dump.common"
+Vue.use(VueDump)
 
 import VueGtag from "vue-gtag"
 Vue.use(VueGtag, {
@@ -114,6 +123,7 @@ import vue_storage from "support/vue_storage.js"
 import vue_fetch from "support/vue_fetch.js"
 import vue_clipboard from "support/vue_clipboard.js"
 import vue_sound from "support/vue_sound.js"
+import vue_actioncable from "support/vue_actioncable.js"
 
 import shogi_player from "shogi-player/src/components/ShogiPlayer.vue"
 import message_link_to from "message_link_to.vue"
@@ -123,6 +133,7 @@ import pulldown_menu from "pulldown_menu.vue"
 import buefy_table_wrapper from "buefy_table_wrapper.vue"
 import three_stage_league_player_chart from "three_stage_league_player_chart.vue"
 import custom_chart from "custom_chart.vue"
+import acns1_sample from "acns1_sample.vue"
 import stopwatch from "stopwatch.vue"
 import simple_board from "simple_board.vue"
 import share_board from "share_board.vue"
@@ -138,6 +149,7 @@ import sp_show_button from "components/sp_show_button.vue"
 import png_dl_button from "components/png_dl_button.vue"
 import tweet_button from "components/tweet_button.vue"
 import membership_medal from "components/membership_medal.vue"
+import debug_print from "components/debug_print.vue"
 import win_lose_circle from "win_lose_circle.vue"
 
 // const router = new VueRouter({
@@ -158,6 +170,7 @@ Vue.mixin({
     vue_fetch,
     vue_clipboard,
     vue_sound,
+    vue_actioncable,
   ],
 
   // よくない命名規則だけどこっちの方が開発しやすい
@@ -178,6 +191,7 @@ Vue.mixin({
     buefy_table_wrapper,
     three_stage_league_player_chart,
     custom_chart,
+    acns1_sample,
 
     // for buefy modal
     tactic_show,
@@ -189,6 +203,7 @@ Vue.mixin({
     sp_show_button,
     png_dl_button,
     tweet_button,
+    debug_print,
 
     // icon
     membership_medal,
@@ -200,7 +215,7 @@ window.GVI = new Vue()           // ActionCable 側から Vue のグローバル
 import "audio_queue.js"
 import "light_session_app.js"
 
-import ActionCable from "actioncable"
+// import ActionCable from "actioncable"
 
 // このような書き方でいいのかどうかはわからない
 window.App = {}
@@ -208,10 +223,10 @@ window.App = {}
 //   console.log(window.Vue)
 //   console.log(window.GVI)
 // })
-if (GVI.$route) {
-  if (GVI.$route.path.includes("/colosseum/battles")) {
-    window.App.cable = ActionCable.createConsumer()
-    ActionCable.startDebugging()
-  }
-}
+// if (GVI.$route) {
+//   if (GVI.$route.path.includes("/colosseum/battles")) {
+//     window.App.cable = ActionCable.createConsumer()
+//     ActionCable.startDebugging()
+//   }
+// }
 // import "action_cable_setup.js"

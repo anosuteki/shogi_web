@@ -8,7 +8,7 @@ RSpec.describe Colosseum::OmniauthCallbacksController, type: :controller do
       OmniAuth.config.mock_auth[:twitter] = OmniAuth::AuthHash.new({
           :provider => 'twitter',
           :uid      => '(uid)',
-          :info     => { :name => '(name)', :image => "https://www.shogi-extend.com/foo.png" },
+          :info     => { :name => '(name)', :image => "https://shogi-flow.xyz/foo.png" },
         })
       request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:twitter]
       get :twitter

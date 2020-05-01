@@ -17,8 +17,8 @@ test("https://staging.shogi-extend.com/shogi/w?query=kinakom0chi", "新サイト
 
 RSpec.describe do
   it "production" do
-    assert { test("http://www.shogi-extend.com", "http -> https")     == [301, "https://www.shogi-extend.com/"]     }
-    assert { test("https://www.shogi-extend.com", "https 見れる")     == [200]                                      }
+    assert { test("http://shogi-flow.xyz", "http -> https")     == [301, "https://shogi-flow.xyz/"]     }
+    assert { test("https://shogi-flow.xyz", "https 見れる")     == [200]                                      }
   end
 
   it "staging" do
@@ -27,7 +27,7 @@ RSpec.describe do
   end
 
   it "www をつける" do
-    assert { test("https://shogi-extend.com", "www をつける")         == [301, "https://www.shogi-extend.com/"]     }
+    assert { test("https://shogi-extend.com", "www をつける")         == [301, "https://shogi-flow.xyz/"]     }
     assert { test("http://shogi-extend.com", "まず https に飛ぶ")     == [301, "https://shogi-extend.com/"]         }
   end
 
@@ -36,9 +36,9 @@ RSpec.describe do
   # end
 
   it "旧サイトからのリダイレクト" do
-    assert { test("http://tk2-221-20341.vs.sakura.ne.jp/shogi/w?query=kinakom0chi", "新サイトへ") == [301, "https://www.shogi-extend.com/w?query=kinakom0chi"] }
-    assert { test("http://tk2-221-20341.vs.sakura.ne.jp/shogi/", "新サイトへ")                    == [301, "https://www.shogi-extend.com/"]                    }
-    assert { test("http://tk2-221-20341.vs.sakura.ne.jp/shogi", "新サイトへ")                     == [301, "https://www.shogi-extend.com/"]                    }
+    assert { test("http://tk2-221-20341.vs.sakura.ne.jp/shogi/w?query=kinakom0chi", "新サイトへ") == [301, "https://shogi-flow.xyz/w?query=kinakom0chi"] }
+    assert { test("http://tk2-221-20341.vs.sakura.ne.jp/shogi/", "新サイトへ")                    == [301, "https://shogi-flow.xyz/"]                    }
+    assert { test("http://tk2-221-20341.vs.sakura.ne.jp/shogi", "新サイトへ")                     == [301, "https://shogi-flow.xyz/"]                    }
   end
 end
 # >> ....

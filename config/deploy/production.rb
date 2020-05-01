@@ -25,20 +25,20 @@ before 'deploy:check:linked_files', 'deploy:database_yml_upload'
 # after "deploy:finished", :yarn_cache_clean
 
 # 起動確認
-set :my_heartbeat_urls, ["https://www.shogi-extend.com/"]
+set :my_heartbeat_urls, ["https://shogi-flow.xyz/"]
 
 # 起動するURL
 set :open_urls, [
-  "https://www.shogi-extend.com",
-  "https://www.shogi-extend.com/w",
-  "https://www.shogi-extend.com/w?query=kinakom0chi",
-  "https://www.shogi-extend.com/adapter",
-  "https://www.shogi-extend.com/xy",
-  "https://www.shogi-extend.com/cpu/battles",
-  "https://www.shogi-extend.com/stopwatch",
-  "https://www.shogi-extend.com/x",
-  "https://www.shogi-extend.com/x/new",
-  "https://www.shogi-extend.com/board",
+  "https://shogi-flow.xyz",
+  "https://shogi-flow.xyz/w",
+  "https://shogi-flow.xyz/w?query=kinakom0chi",
+  "https://shogi-flow.xyz/adapter",
+  "https://shogi-flow.xyz/xy",
+  "https://shogi-flow.xyz/cpu/battles",
+  "https://shogi-flow.xyz/stopwatch",
+  "https://shogi-flow.xyz/x",
+  "https://shogi-flow.xyz/x/new",
+  "https://shogi-flow.xyz/board",
 ]
 
 # if ENV["USE_NEW_DOMAIN"] && false

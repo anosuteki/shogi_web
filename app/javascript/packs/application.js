@@ -128,7 +128,6 @@ import vue_actioncable from "support/vue_actioncable.js"
 import shogi_player from "shogi-player/src/components/ShogiPlayer.vue"
 import message_link_to from "message_link_to.vue"
 import global_message_link from "global_message_link.vue"
-import swars_user_link_to from "swars_user_link_to.vue"
 import pulldown_menu from "pulldown_menu.vue"
 import buefy_table_wrapper from "buefy_table_wrapper.vue"
 import three_stage_league_player_chart from "three_stage_league_player_chart.vue"
@@ -178,7 +177,6 @@ Vue.mixin({
     shogi_player,
     message_link_to,
     global_message_link,
-    swars_user_link_to,
     pulldown_menu,
     stopwatch,
     simple_board,

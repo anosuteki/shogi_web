@@ -72,7 +72,6 @@ group :development, :test do
 
   gem "capistrano", "3.11.0"
   gem "capistrano-rails"        # capistrano + capistrano-bundler
-  gem "capistrano-passenger"
   gem "capistrano-rbenv"
   gem "capistrano-yarn"
   gem "capistrano-rails-console"

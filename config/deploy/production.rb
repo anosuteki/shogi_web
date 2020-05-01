@@ -1,4 +1,4 @@
-server 'ik1-413-38753.vs.sakura.ne.jp', user: 'deploy', roles: %w{app db web}
+server 'shogi-flow.xyz', user: 'deploy', roles: %w{app db web}
 
 set :rbenv_ruby, '2.6.5'
 
@@ -10,7 +10,7 @@ if ENV["APP_RESET"] == "1"
 end
 
 # DBを作り直す？
-if ENV["DB_RESET"] == "1"
+if ENV["DB_RESET"] == "1" || true
   before 'deploy:migrate', 'deploy:db_reset'
 end
 
@@ -29,16 +29,7 @@ set :my_heartbeat_urls, ["https://shogi-flow.xyz/"]
 
 # 起動するURL
 set :open_urls, [
-  "https://shogi-flow.xyz",
-  "https://shogi-flow.xyz/w",
-  "https://shogi-flow.xyz/w?query=kinakom0chi",
-  "https://shogi-flow.xyz/adapter",
-  "https://shogi-flow.xyz/xy",
-  "https://shogi-flow.xyz/cpu/battles",
-  "https://shogi-flow.xyz/stopwatch",
-  "https://shogi-flow.xyz/x",
-  "https://shogi-flow.xyz/x/new",
-  "https://shogi-flow.xyz/board",
+  "https://shogi-flow.xyz/",
 ]
 
 # if ENV["USE_NEW_DOMAIN"] && false

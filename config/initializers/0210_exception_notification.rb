@@ -8,13 +8,5 @@ if Rails.env.production? || Rails.env.staging? || ENV["EXCEPTION_NOTIFICATION_EN
         :sender_address       => "pinpon.ikeda@gmail.com",
         :exception_recipients => %w{pinpon.ikeda@gmail.com},
       },
-
-      # slack-notifier gem があれば反応する
-      slack: {
-        # https://api.slack.com/apps/ADUGJCCFJ/incoming-webhooks
-        webhook_url: Rails.application.credentials.dig(:slack_webhook_url),
-        # channel: '#exception', # webhook_url で投稿先チャンネルが固定されているため、このキーは効かない
-        additional_parameters: { mrkdwn: true },
-      },
     })
 end

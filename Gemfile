@@ -32,7 +32,7 @@ gem 'redis', '~> 4.0'
 # gem "bcrypt", "~> 3.1.7"
 
 # Use ActiveStorage variant
-gem 'image_processing', '~> 1.2'
+# gem 'image_processing', '~> 1.2'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
@@ -69,20 +69,10 @@ group :development, :test do
   gem "capistrano-yarn"
   gem "capistrano-rails-console"
   gem "capistrano-maintenance", require: false
-
-  gem "artii"
-
-  gem "factory_bot_rails"
-
-  gem "rails-erd"
 end
 
 group :development do
   gem "foreman", require: false
-end
-
-group :development, :test do
-  gem "timecop"
 end
 
 gem "slim-rails"
@@ -99,16 +89,8 @@ end
 
 gem "rack-cors", require: "rack/cors" # 別のドメインからJSONアクセスできるようにするための何か
 
-gem "ffi", "1.9.18"             # 1.9.19 が転けるのでとりあえず …… てか何のために入ってる？？？
-
-gem "active_model_serializers"
-
-# application 用
-gem "slack-ruby-client"
-
 # エラー通知
 gem "exception_notification"
-gem "slack-notifier"
 
 # devise
 gem "devise"

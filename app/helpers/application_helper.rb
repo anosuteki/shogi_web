@@ -1,6 +1,4 @@
 module ApplicationHelper
-  include ActsAsTaggableOn::TagsHelper
-
   delegate :icon_tag, to: Icon
 
   def html_title

@@ -15,10 +15,6 @@ module ToolBelt
           link_to_eval("ユーザーセットアップ")                                { "Colosseum::User.setup"                                                   },
           link_to_eval("ユーザー全削除")                                      { "Colosseum::User.destroy_all"                                             },
           link_to_eval("ユーザー追加")                                        { "Colosseum::User.create!"                                                 },
-          link_to_eval("1 + 2")                                               { "1 + 2"                                                                   },
-          link_to_eval("1 / 0", redirect_to: :root)                           { "1 / 0"                                                                   },
-          link_to_eval("flash確認", redirect_to: h.root_path(debug: "true"))  { ""                                                                        },
-
         ].compact.join.html_safe
       end
 

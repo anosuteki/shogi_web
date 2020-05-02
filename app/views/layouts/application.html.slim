@@ -19,6 +19,5 @@ html(lang="ja")
 
     = yield :head
   body
-    = flash_danger_notify_tag
     = yield
     = ToolBelt::Basic.new(view_context: self).to_html

@@ -122,11 +122,11 @@ end
 
 desc "デプロイ失敗"
 task "deploy:failed" do
-  system "say 'デプロイに失敗しました'"
+  system "say '失敗'"
 end
 
 desc "デプロイ成功"
 after "deploy:finished", :finished_banner do # finished にすると動かない
   tp "#{fetch(:branch)} to #{fetch(:stage)} deploy finished"
-  system "say -v Victoria '#{label}'"
+  system "say '完了'"
 end

@@ -117,6 +117,7 @@ Rails.application.configure do
   # ActionCable.server.config.disable_request_forgery_protection = true
   # config.action_cable.disable_request_forgery_protection = true
   config.action_cable.allowed_request_origins = [/https?:\/\/.*/]
+  config.action_cable.allowed_request_origins = ["https://shogi-flow.xyz"]
   # config.action_cable.url = "wss://shogi-flow.xyz:28081"
   config.action_cable.mount_path = "/cable2"
 

@@ -45,8 +45,8 @@ module Colosseum
       class_methods do
         def setup(options = {})
           super
-          create!(name: "alice")
-          create!(name: "bob")
+          tp create!(name: "alice")
+          tp create!(name: "bob")
         end
       end
 

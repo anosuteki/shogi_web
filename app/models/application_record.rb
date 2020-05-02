@@ -4,9 +4,5 @@ class ApplicationRecord < ActiveRecord::Base
   class << self
     def setup(options = {})
     end
-
-    def han(*args)
-      human_attribute_name(*args)
-    end
   end
 end

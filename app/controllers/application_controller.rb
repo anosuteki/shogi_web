@@ -1,6 +1,4 @@
 class ApplicationController < ActionController::Base
-  include LightSessionMethods
-
   before_action do
     ActiveStorage::Current.host = request.base_url
   end
@@ -70,18 +68,8 @@ class ApplicationController < ActionController::Base
 
   concerning :CurrentUserMethods do
     included do
-      helper_method :js_global
       helper_method :sysop?
-      helper_method :editable_record?
       helper_method :current_user
-      helper_method :login_display?
-    end
-
-    def js_global
-      @js_global ||= {
-        :current_user => current_user && ams_sr(current_user, serializer: Colosseum::BasicUserSerializer),
-        :talk_path    => talk_path,
-      }
     end
 
     let :sysop? do
@@ -167,14 +155,6 @@ class ApplicationController < ActionController::Base
       current_user_set_id(nil)
       sign_out(:xuser)
     end
-
-    def login_display?
-      v = false
-      v ||= params[:controller].start_with?("colosseum")
-      v ||= params[:controller].start_with?("xy_records")
-      v ||= params[:controller].start_with?("free_battles") && params[:edit_mode] != "adapter"
-      v
-    end
   end
 
   concerning :BotCheckMethods do
@@ -188,31 +168,6 @@ class ApplicationController < ActionController::Base
 
     let :bot_agent? do
       ua.bot? || request.user_agent.to_s.include?("Barkrowler")
-    end
-  end
-
-  concerning :MobileMethods do
-    included do
-      helper_method :mobile_agent?
-    end
-
-    let :mobile_agent? do
-      ua.mobile?
-    end
-  end
-
-  concerning :ShowiPlayerMethods do
-    included do
-      helper_method :sp_theme_default
-    end
-
-    let :sp_theme_default do
-      # if mobile_agent?
-      #   "simple"
-      # else
-      #   "real"
-      # end
-      "simple"
     end
   end
 end

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  mount ActionCable.server => '/cable2'
+
   devise_for :xusers, {
     class_name: "Colosseum::User",
   }
@@ -11,7 +13,6 @@ Rails.application.routes.draw do
   match 'eval', to: "eval#run", via: [:get, :post, :put, :delete]
 
   ################################################################################ ログアウト
-
 
   resolve "Swars::User" do |user, options|
     swars_basic_path(query: user.to_param)

@@ -53,14 +53,6 @@ group :development do
   gem "spring-watcher-listen", "~> 2.0.0"
 end
 
-group :test do
-  # Adds support for Capybara system testing and selenium driver
-  # gem "capybara", ">= 2.15", "< 4.0"
-  gem 'capybara', '>= 2.15'
-  gem "selenium-webdriver"
-  gem "webdrivers" # brew の chromedriver ではなく最新のものを自動的に ~/.webdrivers/chromedriver に取得し Capybara はそちらを使うようになる
-end
-
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 # gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
@@ -76,28 +68,16 @@ group :development, :test do
   gem "capistrano-yarn"
   gem "capistrano-rails-console"
   gem "capistrano-maintenance", require: false
-  gem "slackistrano"            # for cap production slack:deploy:test
 
   gem "artii"
 
-  gem "rspec-rails"
-  gem "rails-controller-testing" # controller で assigns を使うため
-  # gem "test-unit"      # 入れなくても rspec-rails が minitest などを入れているせいで assert は使える (が、そのせいで test-unit 経由で power_assert が使えない)
-  # gem "minitest-power_assert"
-  gem "rspec-power_assert"      # なのでこっちを使う(が、assert の名前では使えない)
   gem "factory_bot_rails"
-  # gem "webmock" # rack-proxy と干渉するため外す
 
   gem "rails-erd"
 end
 
 group :development do
   gem "foreman", require: false
-  gem "annotate_models"
-end
-
-group :test do
-  gem "database_cleaner"
 end
 
 group :development, :test do
@@ -109,24 +89,12 @@ gem "slim-rails"
 gem "kaminari"
 
 gem "memory_record"
-gem "tree_support"
 gem "table_format"
 gem "html_format"
-
-gem "acts_as_list"
 
 group :development do
   gem "aam"
 end
-
-# gem "acts-as-taggable-on", github: "mbleigh/acts-as-taggable-on", branch: "master"
-gem "acts-as-taggable-on"
-
-gem "rubyzip", require: "zip" # KIF一括ダウンロード用
-
-gem "whenever", require: false
-
-gem "codecov", require: false, group: :test
 
 gem "rack-cors", require: "rack/cors" # 別のドメインからJSONアクセスできるようにするための何か
 

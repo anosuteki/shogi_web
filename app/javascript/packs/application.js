@@ -125,7 +125,6 @@ import vue_clipboard from "support/vue_clipboard.js"
 import vue_sound from "support/vue_sound.js"
 import vue_actioncable from "support/vue_actioncable.js"
 
-import shogi_player from "shogi-player/src/components/ShogiPlayer.vue"
 import message_link_to from "message_link_to.vue"
 import global_message_link from "global_message_link.vue"
 import pulldown_menu from "pulldown_menu.vue"
@@ -149,7 +148,6 @@ import png_dl_button from "components/png_dl_button.vue"
 import tweet_button from "components/tweet_button.vue"
 import membership_medal from "components/membership_medal.vue"
 import debug_print from "components/debug_print.vue"
-import win_lose_circle from "win_lose_circle.vue"
 
 // const router = new VueRouter({
 //   mode: 'history',
@@ -174,7 +172,6 @@ Vue.mixin({
 
   // よくない命名規則だけどこっちの方が開発しやすい
   components: {
-    shogi_player,
     message_link_to,
     global_message_link,
     pulldown_menu,
@@ -185,7 +182,6 @@ Vue.mixin({
     cpu_battle,
     sp_show,
     ox_modal,
-    win_lose_circle,
     buefy_table_wrapper,
     three_stage_league_player_chart,
     custom_chart,

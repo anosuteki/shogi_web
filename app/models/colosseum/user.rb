@@ -58,7 +58,6 @@ module Colosseum
     concerning :DeviseMethods do
       included do
         devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
-        devise :omniauthable, omniauth_providers: [:google, :twitter, :github]
       end
     end
   end

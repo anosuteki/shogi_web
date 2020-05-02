@@ -8,10 +8,6 @@ Rails.application.routes.draw do
 
   devise_for :xusers, {
     class_name: "Colosseum::User",
-    controllers: {
-      omniauth_callbacks: "colosseum/omniauth_callbacks",
-      # sessions: "users/sessions",
-    },
   }
 
   ################################################################################ 対戦

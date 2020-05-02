@@ -106,7 +106,6 @@ end
 
 gem "slim-rails"
 
-gem "rails_autolink"
 gem "kaminari"
 
 gem "memory_record"
@@ -119,16 +118,6 @@ gem "acts_as_list"
 group :development do
   gem "aam"
 end
-
-# gem "bioshogi", path: "~/src/bioshogi"
-gem "bioshogi", github: "akicho8/bioshogi"
-gem "rmagick"                   # for Bioshogi to_img method (mini-magickに変更したい)
-
-# for Swars::Agent
-gem "nokogiri"
-
-gem "faraday"                   # 主に「なんでも棋譜変換」用
-gem "faraday_middleware"        # リダイレクト先おっかけ機能付与
 
 # gem "acts-as-taggable-on", github: "mbleigh/acts-as-taggable-on", branch: "master"
 gem "acts-as-taggable-on"
@@ -158,36 +147,3 @@ gem "devise-bootstrap-views"
 gem "devise-i18n"
 gem "devise-i18n-views"
 gem "bcrypt"
-
-# omniauth
-gem "omniauth"
-gem "omniauth-google-oauth2"
-gem "omniauth-twitter"
-gem "omniauth-facebook"
-gem "omniauth-github"
-
-# markdown
-gem "redcarpet"
-
-# 音声読み上げ
-gem "aws-sdk-polly"
-
-# Palette
-gem "color"
-
-# 検索
-gem "ransack"
-
-# bot判定用
-gem "useragent"
-
-# 休日判定
-gem "holiday_jp"
-
-# Rails Cache
-# たいして速くないのとCのビルドしたのがロードされないので使わない
-# gem "hiredis"
-
-# Redis用の管理画面
-gem "fastentry"
-

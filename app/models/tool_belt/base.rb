@@ -7,9 +7,6 @@ module ToolBelt
     end
 
     def to_html
-      return unless Rails.env.development?
-      return if h.params[:iframe]
-
       h.tag.div(build.join.html_safe, :class => "box tool_belt is_screen_only")
     end
 

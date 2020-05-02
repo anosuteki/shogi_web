@@ -24,8 +24,7 @@ module ToolBelt
 
       list = Colosseum::User.all.limit(25).collect do |e|
         {}.tap do |row|
-          row[:id] = h.link_to(e.id, e)
-          row[:name] = h.link_to(e.name, e)
+          row[:name] = e.name
           row["操作"] = [
             link_to_eval("login", redirect_to: :root)    { "current_user_set_id(#{e.id})"                                                    },
             link_to_eval("削除", redirect_to: :root)     { "Colosseum::User.find(#{e.id}).destroy!"                                          },

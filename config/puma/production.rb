@@ -1,4 +1,4 @@
-# -*- coding: utf-8; compile-command: "scp production.rb s:/var/www/shogi_web_production/current/config/puma; ssh s '(cd /var/www/shogi_web_production/current && bin/rails restart)'" -*-
+# -*- coding: utf-8; compile-command: "scp production.rb s:/var/www/shogi_web_production/current/config/puma; ssh s '(cd /var/www/shogi_web_production/current && bin/rails restart)' && ssh s 'sudo nginx -t && sudo /etc/rc.d/init.d/nginx restart'" -*-
 
 pp({
     "whoami"    => `whoami`.strip,
@@ -24,7 +24,7 @@ threads min_threads_count, max_threads_count
 
 # Specifies the `port` that Puma will listen on to receive requests; default is 3000.
 
-port        ENV.fetch("PORT") { 3000 }
+# port ENV.fetch("PORT") { 3000 }
 
 # Specifies the `environment` that Puma will run in.
 #
@@ -33,12 +33,15 @@ environment ENV.fetch("RAILS_ENV") { "development" }
 # Specifies the `pidfile` that Puma will use.
 pidfile ENV.fetch("PIDFILE") { "tmp/pids/server.pid" }
 
+# workers (=プロセス数) はCPUコア数〜1.5倍を基本とする
+# https://qiita.com/snaka/items/029889198def72e84209#puma-%E3%81%AE-worker-%E6%95%B0%E3%81%AE%E7%9B%AE%E5%AE%89
+
 # Specifies the number of `workers` to boot in clustered mode.
 # Workers are forked web server processes. If using threads and workers together
 # the concurrency of the application would be max `threads` * `workers`.
 # Workers do not work on JRuby or Windows (both of which do not support
 # processes).
-# workers ENV.fetch("WEB_CONCURRENCY") { 1 }
+workers ENV.fetch("WEB_CONCURRENCY") { 1 }
 
 # https://techracho.bpsinc.jp/hachi8833/2017_11_13/47696
 # Use the `preload_app!` method when specifying a `workers` number.

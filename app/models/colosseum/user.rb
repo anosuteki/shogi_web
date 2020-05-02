@@ -69,6 +69,8 @@ module Colosseum
           super
 
           sysop
+
+          create!
         end
       end
 

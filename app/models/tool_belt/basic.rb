@@ -25,6 +25,13 @@ module ToolBelt
       end
 
       out << list.to_html
+
+      hash = {
+        "action_cable_meta_tag" => "" + h.action_cable_meta_tag,
+      }
+
+      out << hash.to_html
+      out
     end
   end
 end

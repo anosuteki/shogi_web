@@ -51,6 +51,7 @@ export default {
 
   methods: {
     speak() {
+      console.log(`speak: ${this.message}`)
       this.$channel.perform("speak", {message: this.message})
     },
     scroll_to_bottom() {

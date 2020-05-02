@@ -129,16 +129,6 @@ Rails.application.configure do
   # for AppConfig
   config.to_prepare do
     Rails.application.config.app_config.deep_merge!({
-        zip_download_function: false,
-        battle_index_permalink_show: false,
-        colosseum_battle_enable: false,
-        player_info_function: false,
-        more_import_function: false,
-        swars_tag_search_function: false,
-        search_form_datalist_function: false,
-        swars_tweet_function: false,
-        xy_master_custom_mode: false,
-        columns_detail_show: false,
         action_cable_enable: false,
       })
   end

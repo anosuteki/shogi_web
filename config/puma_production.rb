@@ -1,4 +1,4 @@
-# -*- coding: utf-8; compile-command: "scp puma_production.rb s:/var/www/shogi_web_production/current/config/puma.rb" -*-
+# -*- coding: utf-8; compile-command: "scp puma_production.rb s:/var/www/shogi_web_production/current/config/puma.rb; ssh s '(cd /var/www/shogi_web_production/current && bin/rails restart)'" -*-
 
 bind "unix://#{Rails.root}/tmp/sockets/puma.sock"
 
@@ -14,7 +14,7 @@ threads min_threads_count, max_threads_count
 
 # Specifies the `port` that Puma will listen on to receive requests; default is 3000.
 #
-# port        ENV.fetch("PORT") { 3000 }
+port        ENV.fetch("PORT") { 3000 }
 
 # Specifies the `environment` that Puma will run in.
 #

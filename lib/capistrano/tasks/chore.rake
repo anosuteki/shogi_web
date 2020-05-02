@@ -102,25 +102,14 @@ end
 
 desc "間違わないようにバナー表示"
 before "deploy:starting", :starting_banner do
-  label = "#{fetch(:application)} #{fetch(:branch)} to #{fetch(:stage)}".gsub(/[_\W]+/, " ")
-  puts Artii::Base.new(font: "slant").output(label)
-  system "say -v Victoria '#{label}'"
+  tp "#{fetch(:application)} #{fetch(:branch)} to #{fetch(:stage)}"
 end
 
 desc "サーバー起動確認"
 after "deploy:finished", :hb do
   Array(fetch(:my_heartbeat_urls)).each do |url|
     puts url
-    puts `curl --silent -I #{url} | grep HTTP`.strip
-  end
-end
-
-desc "RAILS_CACHE_CLEAR=1 cap production deploy ならデプロイ後にキャッシュクリア"
-after "deploy:finished", :rails_cache_clear do
-  on roles(:all) do
-    if ENV["RAILS_CACHE_CLEAR"]
-      execute "cd #{current_path} && RAILS_ENV=#{fetch(:rails_env)} bin/rails runner 'Rails.cache.clear'"
-    end
+    puts `curl -sI #{url} | grep HTTP`.strip
   end
 end
 
@@ -138,7 +127,6 @@ end
 
 desc "デプロイ成功"
 after "deploy:finished", :finished_banner do # finished にすると動かない
-  label = "#{fetch(:branch)} to #{fetch(:stage)} deploy finished".gsub(/[_\W]+/, " ")
-  puts Artii::Base.new(font: "slant").output(label)
+  tp "#{fetch(:branch)} to #{fetch(:stage)} deploy finished"
   system "say -v Victoria '#{label}'"
 end

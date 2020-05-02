@@ -31,10 +31,8 @@ require 'capistrano/rails' # bundler + rails/assets + rails/migrations
 # require 'capistrano/passenger'
 require 'capistrano/yarn'
 
-require "whenever/capistrano"
 require "table_format"
 require "artii"
-require 'slackistrano/capistrano'
 require 'capistrano/maintenance'
 
 # Load custom tasks from `lib/capistrano/tasks` if you have any defined

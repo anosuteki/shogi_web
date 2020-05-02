@@ -2,7 +2,6 @@ class PaletteInfo
   include PaletteMod
   include ApplicationMemoryRecord
   memory_record [
-    # https://bulma.io/documentation/modifiers/color-helpers/
     { key: :info,    hsl: [204 / 360.0, 0.86, 0.53], },
     { key: :danger,  hsl: [348 / 360.0, 1.00, 0.61], },
     { key: :primary, hsl: [171 / 360.0, 1.00, 0.41], },

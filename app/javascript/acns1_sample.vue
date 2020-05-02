@@ -1,14 +1,10 @@
 <template lang="pug">
 .acns1_sample
-  .columns
-    .column
-      b-field
-        b-input(v-model="message" expanded @keypress.native.enter="speak" autofocus)
-        p.control
-          button.button.is-primary(@click="speak") 送信
-      .box.messages_box(ref="messages_box")
-        template(v-for="row in messages")
-          div(v-html="row")
+  input(v-model="message" @keypress.native.enter="speak" autofocus)
+  button.button.is-primary(@click="speak") 送信
+  .box.messages_box(ref="messages_box")
+    template(v-for="row in messages")
+      div(v-html="row")
 </template>
 
 <script>
@@ -65,7 +61,6 @@ export default {
 </script>
 
 <style lang="sass">
-@import "./stylesheets/bulma_init.scss"
 .acns1_sample
   .messages_box
     height: 20rem

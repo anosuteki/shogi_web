@@ -4,440 +4,46 @@
 #
 # ユーザー (colosseum_users as Colosseum::User)
 #
-# |------------------------+--------------------------+-------------+---------------------+------+-------|
-# | name                   | desc                     | type        | opts                | refs | index |
-# |------------------------+--------------------------+-------------+---------------------+------+-------|
-# | id                     | ID                       | integer(8)  | NOT NULL PK         |      |       |
-# | key                    | ユニークなハッシュ       | string(255) | NOT NULL            |      | A!    |
-# | name                   | 名前                     | string(255) | NOT NULL            |      |       |
-# | online_at              | オンラインになった日時   | datetime    |                     |      |       |
-# | fighting_at            | 入室しているなら入室日時 | datetime    |                     |      |       |
-# | matching_at            | マッチング中(開始日時)   | datetime    |                     |      |       |
-# | cpu_brain_key          | CPUの思考タイプ          | string(255) |                     |      |       |
-# | user_agent             | ブラウザ情報             | string(255) | NOT NULL            |      |       |
-# | race_key               | 種族                     | string(255) | NOT NULL            |      | F     |
-# | created_at             | 作成日時                 | datetime    | NOT NULL            |      |       |
-# | updated_at             | 更新日時                 | datetime    | NOT NULL            |      |       |
-# | email                  | メールアドレス           | string(255) | NOT NULL            |      | B!    |
-# | encrypted_password     | Encrypted password       | string(255) | NOT NULL            |      |       |
-# | reset_password_token   | Reset password token     | string(255) |                     |      | C!    |
-# | reset_password_sent_at | Reset password sent at   | datetime    |                     |      |       |
-# | remember_created_at    | Remember created at      | datetime    |                     |      |       |
-# | sign_in_count          | Sign in count            | integer(4)  | DEFAULT(0) NOT NULL |      |       |
-# | current_sign_in_at     | Current sign in at       | datetime    |                     |      |       |
-# | last_sign_in_at        | Last sign in at          | datetime    |                     |      |       |
-# | current_sign_in_ip     | Current sign in ip       | string(255) |                     |      |       |
-# | last_sign_in_ip        | Last sign in ip          | string(255) |                     |      |       |
-# | confirmation_token     | Confirmation token       | string(255) |                     |      | D!    |
-# | confirmed_at           | Confirmed at             | datetime    |                     |      |       |
-# | confirmation_sent_at   | Confirmation sent at     | datetime    |                     |      |       |
-# | unconfirmed_email      | Unconfirmed email        | string(255) |                     |      |       |
-# | failed_attempts        | Failed attempts          | integer(4)  | DEFAULT(0) NOT NULL |      |       |
-# | unlock_token           | Unlock token             | string(255) |                     |      | E!    |
-# | locked_at              | Locked at                | datetime    |                     |      |       |
-# | joined_at              | ロビーに入った日時       | datetime    |                     |      |       |
-# |------------------------+--------------------------+-------------+---------------------+------+-------|
+# |--------------------+--------------------+-------------+--------------------+------+-------|
+# | name               | desc               | type        | opts               | refs | index |
+# |--------------------+--------------------+-------------+--------------------+------+-------|
+# | id                 | ID                 | integer(8)  | NOT NULL PK        |      |       |
+# | key                | ユニークなハッシュ | string(255) |                    |      |       |
+# | name               | 名前               | string(255) |                    |      |       |
+# | email              | メールアドレス     | string(255) |                    |      |       |
+# | encrypted_password | Encrypted password | string(255) | DEFAULT() NOT NULL |      |       |
+# | created_at         | 作成日時           | datetime    | NOT NULL           |      |       |
+# | updated_at         | 更新日時           | datetime    | NOT NULL           |      |       |
+# |--------------------+--------------------+-------------+--------------------+------+-------|
 
 # == Schema Information ==
 #
-# 将棋ウォーズ対戦情報 (swars_battles as Swars::Battle)
-#
-# |---------------+------------------+--------------+-------------+------+-------|
-# | name          | desc             | type         | opts        | refs | index |
-# |---------------+------------------+--------------+-------------+------+-------|
-# | id            | ID               | integer(8)   | NOT NULL PK |      |       |
-# | key           | 対局ユニークキー | string(255)  | NOT NULL    |      | A!    |
-# | battled_at    | 対局日時         | datetime     | NOT NULL    |      | G     |
-# | rule_key      | ルール           | string(255)  | NOT NULL    |      | B     |
-# | csa_seq       | 棋譜             | text(65535)  | NOT NULL    |      |       |
-# | final_key     | 結末             | string(255)  | NOT NULL    |      | C     |
-# | win_user_id   | 勝者             | integer(8)   |             |      | D     |
-# | turn_max      | 手数             | integer(4)   | NOT NULL    |      | H     |
-# | meta_info     | メタ情報         | text(65535)  | NOT NULL    |      |       |
-# | accessed_at   | 最終アクセス日時 | datetime     | NOT NULL    |      |       |
-# | outbreak_turn | Outbreak turn    | integer(4)   |             |      | E     |
-# | created_at    | 作成日時         | datetime     | NOT NULL    |      |       |
-# | updated_at    | 更新日時         | datetime     | NOT NULL    |      |       |
-# | preset_key    | 手合割           | string(255)  | NOT NULL    |      | F     |
-# | start_turn    | 開始局面         | integer(4)   |             |      | I     |
-# | critical_turn | 開戦             | integer(4)   |             |      | J     |
-# | sfen_body     | SFEN形式棋譜     | string(8192) | NOT NULL    |      |       |
-# | image_turn    | OGP画像の局面    | integer(4)   |             |      |       |
-# | sfen_hash     | Sfen hash        | string(255)  | NOT NULL    |      |       |
-# |---------------+------------------+--------------+-------------+------+-------|
-
-# == Schema Information ==
-#
-# 将棋ウォーズユーザー (swars_users as Swars::User)
-#
-# |-------------------+-------------------+-------------+-------------+------+-------|
-# | name              | desc              | type        | opts        | refs | index |
-# |-------------------+-------------------+-------------+-------------+------+-------|
-# | id                | ID                | integer(8)  | NOT NULL PK |      |       |
-# | user_key          | User key          | string(255) | NOT NULL    |      | A!    |
-# | grade_id          | Grade             | integer(8)  | NOT NULL    |      | B     |
-# | last_reception_at | Last reception at | datetime    |             |      | C     |
-# | search_logs_count | Search logs count | integer(4)  | DEFAULT(0)  |      |       |
-# | created_at        | 作成日時          | datetime    | NOT NULL    |      |       |
-# | updated_at        | 更新日時          | datetime    | NOT NULL    |      | D     |
-# |-------------------+-------------------+-------------+-------------+------+-------|
-
-# == Schema Information ==
-#
-# 対局 (colosseum_battles as Colosseum::Battle)
-#
-# |-------------------+----------------------------------------------+-------------+---------------------+------+-------|
-# | name              | desc                                         | type        | opts                | refs | index |
-# |-------------------+----------------------------------------------+-------------+---------------------+------+-------|
-# | id                | ID                                           | integer(8)  | NOT NULL PK         |      |       |
-# | black_preset_key  | ▲手合割                                     | string(255) | NOT NULL            |      |       |
-# | white_preset_key  | △手合割                                     | string(255) | NOT NULL            |      |       |
-# | lifetime_key      | 時間                                         | string(255) | NOT NULL            |      |       |
-# | team_key          | 人数                                         | string(255) | NOT NULL            |      |       |
-# | full_sfen         | USI形式棋譜                                  | text(65535) | NOT NULL            |      |       |
-# | clock_counts      | 対局時計情報                                 | text(65535) | NOT NULL            |      |       |
-# | countdown_flags   | 秒読み状態                                   | text(65535) | NOT NULL            |      |       |
-# | turn_max          | 手番数                                       | integer(4)  | NOT NULL            |      |       |
-# | battle_request_at | 対局申し込みによる成立日時                   | datetime    |                     |      |       |
-# | auto_matched_at   | 自動マッチングによる成立日時                 | datetime    |                     |      |       |
-# | begin_at          | メンバーたち部屋に入って対局開始になった日時 | datetime    |                     |      |       |
-# | end_at            | バトル終了日時                               | datetime    |                     |      |       |
-# | last_action_key   | 最後の状態                                   | string(255) |                     |      |       |
-# | win_location_key  | 勝った方の先後                               | string(255) |                     |      |       |
-# | memberships_count | 対局者総数                                   | integer(4)  | DEFAULT(0) NOT NULL |      |       |
-# | watch_ships_count | この部屋の観戦者数                           | integer(4)  | DEFAULT(0) NOT NULL |      |       |
-# | created_at        | 作成日時                                     | datetime    | NOT NULL            |      |       |
-# | updated_at        | 更新日時                                     | datetime    | NOT NULL            |      |       |
-# |-------------------+----------------------------------------------+-------------+---------------------+------+-------|
-
-# == Schema Information ==
-#
-# 対局と対局者の対応 (colosseum_memberships as Colosseum::Membership)
-#
-# |--------------+----------------------------------------+-------------+-------------+------+-------|
-# | name         | desc                                   | type        | opts        | refs | index |
-# |--------------+----------------------------------------+-------------+-------------+------+-------|
-# | id           | ID                                     | integer(8)  | NOT NULL PK |      |       |
-# | battle_id    | 部屋ID                                 | integer(8)  | NOT NULL    |      | A     |
-# | user_id      | ユーザーID                             | integer(8)  | NOT NULL    |      | B     |
-# | preset_key   | 手合割                                 | string(255) | NOT NULL    |      |       |
-# | location_key | 先後                                   | string(255) | NOT NULL    |      | C     |
-# | position     | 入室順序                               | integer(4)  |             |      | D     |
-# | standby_at   | 準備完了日時                           | datetime    |             |      |       |
-# | fighting_at  | 部屋に入った日時で抜けたり切断すると空 | datetime    |             |      |       |
-# | time_up_at   | タイムアップしたのを検知した日時       | datetime    |             |      |       |
-# | created_at   | 作成日時                               | datetime    | NOT NULL    |      |       |
-# | updated_at   | 更新日時                               | datetime    | NOT NULL    |      |       |
-# |--------------+----------------------------------------+-------------+-------------+------+-------|
-
-# == Schema Information ==
-#
-# Chronicle (colosseum_chronicles as Colosseum::Chronicle)
-#
-# |------------+-----------+-------------+-------------+------+-------|
-# | name       | desc      | type        | opts        | refs | index |
-# |------------+-----------+-------------+-------------+------+-------|
-# | id         | ID        | integer(8)  | NOT NULL PK |      |       |
-# | user_id    | User      | integer(8)  | NOT NULL    |      | A     |
-# | judge_key  | Judge key | string(255) | NOT NULL    |      | B     |
-# | created_at | 作成日時  | datetime    | NOT NULL    |      |       |
-# | updated_at | 更新日時  | datetime    | NOT NULL    |      |       |
-# |------------+-----------+-------------+-------------+------+-------|
-
-# == Schema Information ==
-#
-# Lobby message (colosseum_lobby_messages as Colosseum::LobbyMessage)
-#
-# |-------------+-------------+-------------+-------------+------+-------|
-# | name        | desc        | type        | opts        | refs | index |
-# |-------------+-------------+-------------+-------------+------+-------|
-# | id          | ID          | integer(8)  | NOT NULL PK |      |       |
-# | user_id     | ユーザーID  | integer(8)  | NOT NULL    |      | A     |
-# | message     | 発言        | text(65535) | NOT NULL    |      |       |
-# | msg_options | Msg options | text(65535) | NOT NULL    |      |       |
-# | created_at  | 作成日時    | datetime    | NOT NULL    |      |       |
-# | updated_at  | 更新日時    | datetime    | NOT NULL    |      |       |
-# |-------------+-------------+-------------+-------------+------+-------|
-
-# == Schema Information ==
-#
-# Auth info (colosseum_auth_infos as Colosseum::AuthInfo)
-#
-# |-----------+--------------+-------------+-------------+------+-------|
-# | name      | desc         | type        | opts        | refs | index |
-# |-----------+--------------+-------------+-------------+------+-------|
-# | id        | ID           | integer(8)  | NOT NULL PK |      |       |
-# | user_id   | User         | integer(8)  | NOT NULL    |      | B     |
-# | provider  | プロバイダー | string(255) | NOT NULL    |      | A!    |
-# | uid       | UID          | string(255) | NOT NULL    |      | A!    |
-# | meta_info | 棋譜ヘッダー | text(65535) |             |      |       |
-# |-----------+--------------+-------------+-------------+------+-------|
-
-# == Schema Information ==
-#
-# Rule (colosseum_rules as Colosseum::Rule)
-#
-# |------------------+------------------+-------------+-------------+------+-------|
-# | name             | desc             | type        | opts        | refs | index |
-# |------------------+------------------+-------------+-------------+------+-------|
-# | id               | ID               | integer(8)  | NOT NULL PK |      |       |
-# | user_id          | User             | integer(8)  | NOT NULL    |      | A!    |
-# | lifetime_key     | Lifetime key     | string(255) | NOT NULL    |      | B     |
-# | team_key         | Team key         | string(255) | NOT NULL    |      | C     |
-# | self_preset_key  | Self preset key  | string(255) | NOT NULL    |      | D     |
-# | oppo_preset_key  | Oppo preset key  | string(255) | NOT NULL    |      | E     |
-# | robot_accept_key | Robot accept key | string(255) | NOT NULL    |      | F     |
-# | created_at       | 作成日時         | datetime    | NOT NULL    |      |       |
-# | updated_at       | 更新日時         | datetime    | NOT NULL    |      |       |
-# |------------------+------------------+-------------+-------------+------+-------|
-
-# == Schema Information ==
-#
-# Chat message (colosseum_chat_messages as Colosseum::ChatMessage)
-#
-# |-------------+-------------+-------------+-------------+------+-------|
-# | name        | desc        | type        | opts        | refs | index |
-# |-------------+-------------+-------------+-------------+------+-------|
-# | id          | ID          | integer(8)  | NOT NULL PK |      |       |
-# | battle_id   | 部屋ID      | integer(8)  | NOT NULL    |      | A     |
-# | user_id     | ユーザーID  | integer(8)  | NOT NULL    |      | B     |
-# | message     | 発言        | text(65535) | NOT NULL    |      |       |
-# | msg_options | Msg options | text(65535) | NOT NULL    |      |       |
-# | created_at  | 作成日時    | datetime    | NOT NULL    |      |       |
-# | updated_at  | 更新日時    | datetime    | NOT NULL    |      |       |
-# |-------------+-------------+-------------+-------------+------+-------|
-
-# == Schema Information ==
-#
-# Profile (colosseum_profiles as Colosseum::Profile)
-#
-# |------------------------+----------------------+-------------+-------------+------+-------|
-# | name                   | desc                 | type        | opts        | refs | index |
-# |------------------------+----------------------+-------------+-------------+------+-------|
-# | id                     | ID                   | integer(8)  | NOT NULL PK |      |       |
-# | user_id                | User                 | integer(8)  | NOT NULL    |      | A!    |
-# | begin_greeting_message | 対局開始時のあいさつ | string(255) | NOT NULL    |      |       |
-# | end_greeting_message   | 対局終了時のあいさつ | string(255) | NOT NULL    |      |       |
-# | created_at             | 作成日時             | datetime    | NOT NULL    |      |       |
-# | updated_at             | 更新日時             | datetime    | NOT NULL    |      |       |
-# |------------------------+----------------------+-------------+-------------+------+-------|
-
-# == Schema Information ==
-#
-# Watch ship (colosseum_watch_ships as Colosseum::WatchShip)
-#
-# |------------+------------+------------+-------------+------+-------|
-# | name       | desc       | type       | opts        | refs | index |
-# |------------+------------+------------+-------------+------+-------|
-# | id         | ID         | integer(8) | NOT NULL PK |      |       |
-# | battle_id  | 部屋ID     | integer(8) | NOT NULL    |      | A     |
-# | user_id    | ユーザーID | integer(8) | NOT NULL    |      | B     |
-# | created_at | 作成日時   | datetime   | NOT NULL    |      |       |
-# | updated_at | 更新日時   | datetime   | NOT NULL    |      |       |
-# |------------+------------+------------+-------------+------+-------|
-
-# == Schema Information ==
-#
-# Membership (tsl_memberships as Tsl::Membership)
-#
-# |------------+------------+-------------+-------------+------+-------|
-# | name       | desc       | type        | opts        | refs | index |
-# |------------+------------+-------------+-------------+------+-------|
-# | id         | ID         | integer(8)  | NOT NULL PK |      |       |
-# | league_id  | League     | integer(8)  | NOT NULL    |      | A! B  |
-# | user_id    | User       | integer(8)  | NOT NULL    |      | A! C  |
-# | result_key | Result key | string(255) | NOT NULL    |      | D     |
-# | start_pos  | Start pos  | integer(4)  | NOT NULL    |      | E     |
-# | age        | Age        | integer(4)  |             |      |       |
-# | win        | Win        | integer(4)  |             |      | F     |
-# | lose       | Lose       | integer(4)  |             |      | G     |
-# | ox         | Ox         | string(255) | NOT NULL    |      |       |
-# | created_at | 作成日時   | datetime    | NOT NULL    |      |       |
-# | updated_at | 更新日時   | datetime    | NOT NULL    |      |       |
-# |------------+------------+-------------+-------------+------+-------|
-
-# == Schema Information ==
-#
-# League (tsl_leagues as Tsl::League)
-#
-# |------------+------------+------------+-------------+------+-------|
-# | name       | desc       | type       | opts        | refs | index |
-# |------------+------------+------------+-------------+------+-------|
-# | id         | ID         | integer(8) | NOT NULL PK |      |       |
-# | generation | Generation | integer(4) | NOT NULL    |      | A     |
-# | created_at | 作成日時   | datetime   | NOT NULL    |      |       |
-# | updated_at | 更新日時   | datetime   | NOT NULL    |      |       |
-# |------------+------------+------------+-------------+------+-------|
-
-# == Schema Information ==
-#
-# User (tsl_users as Tsl::User)
-#
-# |-------------------+-------------------+-------------+-------------+------+-------|
-# | name              | desc              | type        | opts        | refs | index |
-# |-------------------+-------------------+-------------+-------------+------+-------|
-# | id                | ID                | integer(8)  | NOT NULL PK |      |       |
-# | name              | Name              | string(255) | NOT NULL    |      | A!    |
-# | first_age         | First age         | integer(4)  |             |      |       |
-# | last_age          | Last age          | integer(4)  |             |      |       |
-# | memberships_count | Memberships count | integer(4)  | DEFAULT(0)  |      |       |
-# | created_at        | 作成日時          | datetime    | NOT NULL    |      |       |
-# | updated_at        | 更新日時          | datetime    | NOT NULL    |      |       |
-# |-------------------+-------------------+-------------+-------------+------+-------|
-
-# == Schema Information ==
-#
-# Xy record (xy_records as XyRecord)
-#
-# |-------------------+----------------+-------------+-------------+-----------------------------+-------|
-# | name              | desc           | type        | opts        | refs                        | index |
-# |-------------------+----------------+-------------+-------------+-----------------------------+-------|
-# | id                | ID             | integer(8)  | NOT NULL PK |                             |       |
-# | colosseum_user_id | Colosseum user | integer(8)  |             | :user => Colosseum::User#id | A     |
-# | entry_name        | Entry name     | string(255) | NOT NULL    |                             | B     |
-# | summary           | Summary        | string(255) |             |                             |       |
-# | xy_rule_key       | Xy rule key    | string(255) | NOT NULL    |                             | C     |
-# | x_count           | X count        | integer(4)  | NOT NULL    |                             |       |
-# | spent_sec         | Spent sec      | float(24)   | NOT NULL    |                             |       |
-# | created_at        | 作成日時       | datetime    | NOT NULL    |                             |       |
-# | updated_at        | 更新日時       | datetime    | NOT NULL    |                             |       |
-# |-------------------+----------------+-------------+-------------+-----------------------------+-------|
-#
-#- Remarks ----------------------------------------------------------------------
-# Colosseum::User.has_many :free_battles, foreign_key: :colosseum_user_id
-#--------------------------------------------------------------------------------
-
-# == Schema Information ==
-#
-# 対局と対局者の対応 (swars_memberships as Swars::Membership)
-#
-# |----------------+----------------+-------------+-------------+------+------------|
-# | name           | desc           | type        | opts        | refs | index      |
-# |----------------+----------------+-------------+-------------+------+------------|
-# | id             | ID             | integer(8)  | NOT NULL PK |      |            |
-# | battle_id      | 対局共通情報   | integer(8)  | NOT NULL    |      | A! B! C! D |
-# | user_id        | ユーザー       | integer(8)  | NOT NULL    |      | B! E       |
-# | grade_id       | 棋力           | integer(8)  | NOT NULL    |      | F          |
-# | judge_key      | 結果           | string(255) | NOT NULL    |      | G          |
-# | location_key   | 先手or後手     | string(255) | NOT NULL    |      | A! H       |
-# | position       | 順序           | integer(4)  |             |      | I          |
-# | created_at     | 作成日時       | datetime    | NOT NULL    |      |            |
-# | updated_at     | 更新日時       | datetime    | NOT NULL    |      |            |
-# | grade_diff     | Grade diff     | integer(4)  | NOT NULL    |      | J          |
-# | think_max      | Think max      | integer(4)  |             |      |            |
-# | op_user_id     | Op user        | integer(8)  |             |      | C! K       |
-# | think_last     | Think last     | integer(4)  |             |      |            |
-# | think_all_avg  | Think all avg  | integer(4)  |             |      |            |
-# | think_end_avg  | Think end avg  | integer(4)  |             |      |            |
-# | two_serial_max | Two serial max | integer(4)  |             |      |            |
-# |----------------+----------------+-------------+-------------+------+------------|
-
-# == Schema Information ==
-#
-# Grade (swars_grades as Swars::Grade)
-#
-# |------------+--------------------+-------------+-------------+------+-------|
-# | name       | desc               | type        | opts        | refs | index |
-# |------------+--------------------+-------------+-------------+------+-------|
-# | id         | ID                 | integer(8)  | NOT NULL PK |      |       |
-# | key        | ユニークなハッシュ | string(255) | NOT NULL    |      | A!    |
-# | priority   | Priority           | integer(4)  | NOT NULL    |      | B     |
-# | created_at | 作成日時           | datetime    | NOT NULL    |      |       |
-# | updated_at | 更新日時           | datetime    | NOT NULL    |      |       |
-# |------------+--------------------+-------------+-------------+------+-------|
-
-# == Schema Information ==
-#
-# Search log (swars_search_logs as Swars::SearchLog)
+# Room (acns1_rooms as Acns1::Room)
 #
 # |------------+----------+------------+-------------+------+-------|
 # | name       | desc     | type       | opts        | refs | index |
 # |------------+----------+------------+-------------+------+-------|
 # | id         | ID       | integer(8) | NOT NULL PK |      |       |
-# | user_id    | User     | integer(8) | NOT NULL    |      | A     |
 # | created_at | 作成日時 | datetime   | NOT NULL    |      |       |
 # | updated_at | 更新日時 | datetime   | NOT NULL    |      |       |
 # |------------+----------+------------+-------------+------+-------|
 
 # == Schema Information ==
 #
-# Cpu battle record (cpu_battle_records as CpuBattleRecord)
+# Message (acns1_messages as Acns1::Message)
 #
-# |-------------------+----------------+-------------+-------------+-----------------------------+-------|
-# | name              | desc           | type        | opts        | refs                        | index |
-# |-------------------+----------------+-------------+-------------+-----------------------------+-------|
-# | id                | ID             | integer(8)  | NOT NULL PK |                             |       |
-# | colosseum_user_id | Colosseum user | integer(8)  |             | :user => Colosseum::User#id | A     |
-# | judge_key         | Judge key      | string(255) | NOT NULL    |                             | B     |
-# | created_at        | 作成日時       | datetime    | NOT NULL    |                             |       |
-# | updated_at        | 更新日時       | datetime    | NOT NULL    |                             |       |
-# |-------------------+----------------+-------------+-------------+-----------------------------+-------|
-#
-#- Remarks ----------------------------------------------------------------------
-# Colosseum::User.has_many :free_battles, foreign_key: :colosseum_user_id
-#--------------------------------------------------------------------------------
-
-# == Schema Information ==
-#
-# Alert log (alert_logs as AlertLog)
-#
-# |------------+----------+--------------+-------------+------+-------|
-# | name       | desc     | type         | opts        | refs | index |
-# |------------+----------+--------------+-------------+------+-------|
-# | id         | ID       | integer(8)   | NOT NULL PK |      |       |
-# | subject    | 件名     | string(255)  | NOT NULL    |      |       |
-# | body       | 内容     | string(8192) | NOT NULL    |      |       |
-# | created_at | 作成日時 | datetime     | NOT NULL    |      |       |
-# |------------+----------+--------------+-------------+------+-------|
-
-# == Schema Information ==
-#
-# 棋譜投稿 (free_battles as FreeBattle)
-#
-# |-------------------+--------------------+----------------+-------------+-----------------------------------+-------|
-# | name              | desc               | type           | opts        | refs                              | index |
-# |-------------------+--------------------+----------------+-------------+-----------------------------------+-------|
-# | id                | ID                 | integer(8)     | NOT NULL PK |                                   |       |
-# | key               | ユニークなハッシュ | string(255)    | NOT NULL    |                                   | A!    |
-# | kifu_url          | 棋譜URL            | string(255)    |             |                                   |       |
-# | kifu_body         | 棋譜               | text(16777215) | NOT NULL    |                                   |       |
-# | turn_max          | 手数               | integer(4)     | NOT NULL    |                                   | F     |
-# | meta_info         | 棋譜ヘッダー       | text(65535)    | NOT NULL    |                                   |       |
-# | battled_at        | Battled at         | datetime       | NOT NULL    |                                   | E     |
-# | outbreak_turn     | Outbreak turn      | integer(4)     |             |                                   | B     |
-# | use_key           | Use key            | string(255)    | NOT NULL    |                                   | C     |
-# | accessed_at       | Accessed at        | datetime       | NOT NULL    |                                   |       |
-# | created_at        | 作成日時           | datetime       | NOT NULL    |                                   |       |
-# | updated_at        | 更新日時           | datetime       | NOT NULL    |                                   |       |
-# | colosseum_user_id | 所有者ID           | integer(8)     |             | :owner_user => Colosseum::User#id | D     |
-# | title             | タイトル           | string(255)    |             |                                   |       |
-# | description       | 説明               | text(65535)    | NOT NULL    |                                   |       |
-# | start_turn        | 開始局面           | integer(4)     |             |                                   | G     |
-# | critical_turn     | 開戦               | integer(4)     |             |                                   | H     |
-# | saturn_key        | 公開範囲           | string(255)    | NOT NULL    |                                   | I     |
-# | sfen_body         | SFEN形式棋譜       | string(8192)   | NOT NULL    |                                   |       |
-# | image_turn        | OGP画像の局面      | integer(4)     |             |                                   |       |
-# | preset_key        | Preset key         | string(255)    | NOT NULL    |                                   |       |
-# | sfen_hash         | Sfen hash          | string(255)    | NOT NULL    |                                   |       |
-# |-------------------+--------------------+----------------+-------------+-----------------------------------+-------|
+# |------------+----------+-------------+-------------+-----------------------+-------|
+# | name       | desc     | type        | opts        | refs                  | index |
+# |------------+----------+-------------+-------------+-----------------------+-------|
+# | id         | ID       | integer(8)  | NOT NULL PK |                       |       |
+# | user_id    | User     | integer(8)  |             | => Colosseum::User#id | A     |
+# | room_id    | Room     | integer(8)  |             |                       | B     |
+# | body       | 内容     | text(65535) |             |                       |       |
+# | created_at | 作成日時 | datetime    | NOT NULL    |                       |       |
+# | updated_at | 更新日時 | datetime    | NOT NULL    |                       |       |
+# |------------+----------+-------------+-------------+-----------------------+-------|
 #
 #- Remarks ----------------------------------------------------------------------
-# Colosseum::User.has_many :free_battles, foreign_key: :colosseum_user_id
+# 【警告:リレーション欠如】Colosseum::Userモデルで has_many :acns1/messages されていません
 #--------------------------------------------------------------------------------
-
-# == Schema Information ==
-#
-# 各種棋譜ファイル内容 (converted_infos as ConvertedInfo)
-#
-# |------------------+------------------+-------------+-------------+----------------------------+-------|
-# | name             | desc             | type        | opts        | refs                       | index |
-# |------------------+------------------+-------------+-------------+----------------------------+-------|
-# | id               | ID               | integer(8)  | NOT NULL PK |                            |       |
-# | convertable_type | Convertable type | string(255) | NOT NULL    | SpecificModel(polymorphic) | A     |
-# | convertable_id   | Convertable      | integer(8)  | NOT NULL    | => (convertable_type)#id   | A     |
-# | text_body        | 本体             | text(65535) | NOT NULL    |                            |       |
-# | text_format      | 種類             | string(255) | NOT NULL    |                            | B     |
-# | created_at       | 作成日時         | datetime    | NOT NULL    |                            |       |
-# | updated_at       | 更新日時         | datetime    | NOT NULL    |                            |       |
-# |------------------+------------------+-------------+-------------+----------------------------+-------|
 

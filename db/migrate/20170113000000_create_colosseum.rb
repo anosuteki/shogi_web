@@ -4,6 +4,7 @@ class CreateColosseum < ActiveRecord::Migration[6.0]
       t.string :key
       t.string :name
       t.string :email
+      t.string :encrypted_password, null: false, default: ""
       t.timestamps
     end
 

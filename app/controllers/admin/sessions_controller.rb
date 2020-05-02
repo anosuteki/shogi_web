@@ -1,7 +1,5 @@
 module Admin
   class SessionsController < ::Admin::ApplicationController
-    skip_before_action :admin_login_required
-
     def destroy
       if admin_user
         session.delete(:admin_user)

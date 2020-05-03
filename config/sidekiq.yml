@@ -13,7 +13,7 @@ staging:
   :logfile: log/sidekiq_staging.log
 
 production:
-  :concurrency: 15
+  :concurrency: 1
   :logfile: log/sidekiq_production.log
 
 :queues:

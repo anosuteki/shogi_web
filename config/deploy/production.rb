@@ -78,14 +78,14 @@ task :server_setting do
   end
 end
 
-desc 'puma_restart'
-task :puma_restart do
-  on roles(:app) do |host|
-    within current_path do
-      with rails_env: fetch(:rails_env) do
-        execute :rails, 'restart'
-      end
-    end
-  end
-end
-after 'deploy:restart', 'puma_restart'
+# desc 'puma_restart'
+# task :puma_restart do
+#   on roles(:app) do |host|
+#     within current_path do
+#       with rails_env: fetch(:rails_env) do
+#         execute :rails, 'restart'
+#       end
+#     end
+#   end
+# end
+# after 'deploy:restart', 'puma_restart'

@@ -112,3 +112,7 @@ gem 'sidekiq'
 # gem 'sidekiq-status'
 # gem 'sidekiq-monitor-stats', require: false
 # gem 'sinatra', require: false  # sidekiq web
+
+
+gem "activerecord-session_store"
+

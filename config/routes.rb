@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  mount ActionCable.server => '/cable2'
+  # mount ActionCable.server => '/cable2'
 
   devise_for :xusers, {
     class_name: "Colosseum::User",

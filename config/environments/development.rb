@@ -91,4 +91,8 @@ Rails.application.configure do
   # config.action_cable.allowed_request_origins = ["https://shogi-flow.xyz"]
   # config.action_cable.url = "wss://shogi-flow.xyz:28081"
   config.action_cable.mount_path = "/cable2"
+
+  # ################################################################################ ActiveJob
+  config.active_job.queue_adapter     = :sidekiq
+  # config.active_job.queue_name_prefix = nil
 end

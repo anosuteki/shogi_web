@@ -28,7 +28,7 @@
 
 redis_options = {
   :url       => 'redis://localhost:6379/0',
-  :namespace => "sidekiq_#{Rails.env}",
+  :namespace => "shogi_web_#{Rails.env}_sidekiq",
 }
 
 # default_worker_options = {
@@ -78,3 +78,7 @@ end
 #   end
 # end
 # Sidekiq::Logging.logger.formatter = JSTTimestampFormatter.new
+
+# if Rails.env.test?
+#   require 'sidekiq/testing/inline'
+# end

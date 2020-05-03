@@ -25,9 +25,8 @@ class EvalController < ApplicationController
         retval = retval.to_t
       end
       retval
-    rescue => error
-      backtrace = Array(error.backtrace) - caller
-      ["#{error.class.name}: #{error}\n", *backtrace.map { |e| "#{' ' * 8}from #{e}\n"}].join
+    # rescue => error
+    #   error.message.to_s.lines.first
     end
   end
 end

@@ -7,9 +7,7 @@ module ToolBelt
 
       out << h.tag.div(:class => "buttons") do
         [
-          link_to_eval("ユーザーセットアップ")                                { "Colosseum::User.setup"                                                   },
-          link_to_eval("ユーザー全削除")                                      { "Colosseum::User.destroy_all"                                             },
-          link_to_eval("ユーザー追加")                                        { "Colosseum::User.create!"                                                 },
+          link_to_eval("発言", redirect_to: :root)  { "current_user.acns1_messages.create!(body: SecureRandom.hex)"},
         ].compact.join.html_safe
       end
 
@@ -28,6 +26,7 @@ module ToolBelt
 
       hash = {
         "action_cable_meta_tag" => "" + h.action_cable_meta_tag,
+        "Acns1::Message.count"  => Acns1::Message.count,
       }
 
       out << hash.to_html

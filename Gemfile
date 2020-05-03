@@ -70,6 +70,10 @@ group :development, :test do
   gem "capistrano-yarn"
   gem "capistrano-rails-console"
   gem "capistrano-maintenance", require: false
+
+  # sidekiq を安全に止める
+  # https://qiita.com/pekepek/items/8eb302c997335fbce854
+  gem "capistrano-sidekiq"
 end
 
 group :development do
@@ -106,5 +110,4 @@ gem 'sidekiq'
 # gem 'sidekiq-retries'
 # gem 'sidekiq-status'
 # gem 'sidekiq-monitor-stats', require: false
-gem 'sinatra', require: false  # sidekiq web
-
+# gem 'sinatra', require: false  # sidekiq web

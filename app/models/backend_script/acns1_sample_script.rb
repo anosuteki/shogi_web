@@ -7,10 +7,13 @@ module BackendScript
 
     self.script_name = "チャット (acns1)"
 
+    BOOT_TIME = Time.current
+
     def script_body
       Acns1.setup
 
       out = ""
+      out << [BOOT_TIME.strftime("%F %T")].to_html
 
       if !current_room
         out += Acns1::Room.order(:id).collect { |room|

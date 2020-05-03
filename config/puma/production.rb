@@ -72,3 +72,8 @@ tag "shogi_web_production"
 # # end
 #
 # debug
+
+# わかりにくいが quiet false にするとリクエストを確認できるようにする
+# ドキュメントにはデフォルト false とあるが、実際は quiet true がデフォルトになっている
+# ログは journalctl -f -u puma で見れる
+quiet false

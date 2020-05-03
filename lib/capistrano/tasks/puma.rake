@@ -20,7 +20,8 @@
 
 # append :rbenv_map_bins, 'puma', 'pumactl'
 
-# after "deploy:restart",
+# tmp/restart.txtをtouchするとリスタートする
+after "deploy:restart", "puma:restart"
 
 # cap production puma:status
 # cap production puma:restart

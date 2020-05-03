@@ -1,0 +1,19 @@
+---
+# このファイルはバックグランド側しか読まない
+:concurrency: 5
+:pidfile: tmp/sidekiq.pid
+:logfile: log/sidekiq.log
+:verbose: false
+staging:
+  :concurrency: 5
+production:
+  :concurrency: 5
+:queues:
+  # 番号は優先度で高い方が先。同じ優先度のときはランダムになる。
+  - [most_high, 10]
+  - [high,       5]
+  - [mid,        4]
+  - [default,    4]
+  - [low,        3]
+  - [batch,      2]
+  - [most_low,   1]

@@ -30,7 +30,7 @@ require 'capistrano/rbenv'
 require 'capistrano/rails' # bundler + rails/assets + rails/migrations
 # require 'capistrano/passenger'
 require 'capistrano/yarn'
-require 'capistrano/sidekiq'
+# require 'capistrano/sidekiq'
 
 require "table_format"
 require 'capistrano/maintenance'

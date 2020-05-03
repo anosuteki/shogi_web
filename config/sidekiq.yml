@@ -2,7 +2,7 @@
 # このファイルはバックグランド側しか読まない
 
 # スレッド数
-:concurrency: 2
+:concurrency: 1
 
 :verbose: false
 :pidfile: tmp/pids/sidekiq.pid
@@ -13,7 +13,7 @@ staging:
   :logfile: log/sidekiq_staging.log
 
 production:
-  :concurrency: 5
+  :concurrency: 15
   :logfile: log/sidekiq_production.log
 
 :queues:

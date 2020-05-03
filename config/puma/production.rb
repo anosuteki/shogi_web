@@ -1,4 +1,4 @@
-# -*- coding: utf-8; compile-command: "scp production.rb s:/var/www/shogi_web_production/current/config/puma; ssh s '(cd /var/www/shogi_web_production/current && bin/rails restart)' && ssh s 'sudo nginx -t && sudo /etc/rc.d/init.d/nginx restart'" -*-
+# -*- coding: utf-8; compile-command: "scp production.rb s:/var/www/shogi_web_production/current/config/puma; ssh s '(cd /var/www/shogi_web_production/current && bin/rails restart)' && ssh s 'sudo nginx -t && sudo systemctl restart nginx'" -*-
 
 pp({
     "whoami"    => `whoami`.strip,
@@ -33,6 +33,8 @@ environment ENV.fetch("RAILS_ENV") { "development" }
 # Specifies the `pidfile` that Puma will use.
 pidfile ENV.fetch("PIDFILE") { "tmp/pids/server.pid" }
 
+state_path "tmp/pids/puma.state"
+
 # workers (=プロセス数) はCPUコア数〜1.5倍を基本とする
 # https://qiita.com/snaka/items/029889198def72e84209#puma-%E3%81%AE-worker-%E6%95%B0%E3%81%AE%E7%9B%AE%E5%AE%89
 
@@ -54,12 +56,19 @@ workers ENV.fetch("WEB_CONCURRENCY") { 1 }
 # Allow puma to be restarted by `rails restart` command.
 plugin :tmp_restart
 
-# tag "foobar"
-# 
+# ▼プロセスを確認しやすくするためのタグ
+#
+#   $ ps auxwww | grep shogi
+#   root      1834  0.7  5.5 214664 27596 ?  Ssl  22:26   0:00 puma 4.3.3 (unix:///var/www/shogi_web_production/shared/tmp/sockets/puma.sock) [shogi_web_production]
+#   root      1988  1.7 18.6 847228 93028 ?  Sl   22:26   0:01 puma: cluster worker 0: 1834 [shogi_web_production]
+#   root      1989  1.6 17.9 837452 89312 ?  Sl   22:26   0:01 puma: cluster worker 1: 1834 [shogi_web_production]
+#
+tag "shogi_web_production"
+
 # # app do |env|
 # #   puts env
 # #   body = 'Hello, World!'
 # #   [200, { 'Content-Type' => 'text/plain', 'Content-Length' => body.length.to_s }, [body]]
 # # end
-# 
+#
 # debug

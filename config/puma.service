@@ -1,0 +1,32 @@
+# -*- coding: utf-8; compile-command: "scp puma.service s:/etc/systemd/system/; ssh s 'sudo systemctl daemon-reload; sudo systemctl restart puma; sudo systemctl status puma; sudo systemctl reset-failed puma'" -*-
+
+# ssh s sudo systemctl status puma
+# bundle binstub puma --bin=sbin
+
+# https://github.com/puma/puma/blob/master/docs/systemd.md
+# https://qiita.com/ch7821/items/369090459769c603bb6b
+
+[Unit]
+Description=Puma Application Server
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/var/www/shogi_web_production/current
+Environment="RAILS_ENV=production"
+Environment="PORT=3000"
+# http://thoames.hatenadiary.jp/entry/2018/07/13/104308
+ExecStart=/bin/bash -lc "/usr/local/rbenv/bin/rbenv exec bundle exec puma -C config/puma/production.rb"
+ExecStop=/bin/bash -lc "/usr/local/rbenv/bin/rbenv exec bundle exec pumactl -S /var/www/shogi_web_production/current/tmp/pids/puma.state stop"
+# /usr/local/rbenv/bin/rbenv exec bundle exec pumactl
+# ExecStart="/usr/local/rbenv/shims/puma -e production -C config/puma/production.rb"
+# ExecStart="/var/www/shogi_web_production/current/.bin/puma -e production -C config/puma/production.rb"
+# ExecStart="/usr/local/rbenv/shims/bundle exec puma -e production -C config/puma/production.rb"
+TimeoutSec=300
+
+Restart=always
+# Restart=no
+
+[Install]
+WantedBy=multi-user.target

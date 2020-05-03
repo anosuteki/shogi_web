@@ -4,7 +4,7 @@ class EvalController < ApplicationController
     console_str = ">> #{current_code}\n#{retval}"
 
     if v = params[:redirect_to].presence
-      redirect_to v, alert: h.simple_format(console_str)
+      redirect_to v
       return
     end
 
@@ -19,14 +19,10 @@ class EvalController < ApplicationController
   end
 
   def evaluate(input)
-    begin
-      retval = eval(input)
-      if !retval.kind_of?(String) && retval.respond_to?(:to_t)
-        retval = retval.to_t
-      end
-      retval
-    # rescue => error
-    #   error.message.to_s.lines.first
+    retval = eval(input)
+    if !retval.kind_of?(String) && retval.respond_to?(:to_t)
+      retval = retval.to_t
     end
+    retval
   end
 end

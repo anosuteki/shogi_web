@@ -16,22 +16,22 @@
 
 # cap production sidekiq:quiet
 
-set_if_empty :sidekiq_pid_path, -> { Pathname(shared_path).join("tmp/pids/sidekiq.pid") }
-
-namespace :sidekiq do
-  desc "sidekiq stop"
-  task :quiet do
-    on roles(:app) do
-      execute "kill -TSTP `cat #{fetch(:sidekiq_pid_path)}`; true"
-    end
-  end
-  before "deploy:updated", "sidekiq:quiet"
-
-  desc "sidekiq kill"
-  task :kill do
-    on roles(:app) do
-      execute "kill -TERM `cat #{fetch(:sidekiq_pid_path)}`; true"
-    end
-  end
-  after "deploy:updated", "sidekiq:kill"
-end
+# set_if_empty :sidekiq_pid_path, -> { Pathname(shared_path).join("tmp/pids/sidekiq.pid") }
+# 
+# namespace :sidekiq do
+#   desc "sidekiq stop"
+#   task :quiet do
+#     on roles(:app) do
+#       execute "kill -TSTP `cat #{fetch(:sidekiq_pid_path)}`; true"
+#     end
+#   end
+#   before "deploy:updated", "sidekiq:quiet"
+# 
+#   desc "sidekiq kill"
+#   task :kill do
+#     on roles(:app) do
+#       execute "kill -TERM `cat #{fetch(:sidekiq_pid_path)}`; true"
+#     end
+#   end
+#   after "deploy:updated", "sidekiq:kill"
+# end

@@ -70,6 +70,7 @@ group :development, :test do
   gem "capistrano-yarn"
   gem "capistrano-rails-console"
   gem "capistrano-maintenance", require: false
+  gem "capistrano3-puma"
 
   # sidekiq を安全に止める
   # https://qiita.com/pekepek/items/8eb302c997335fbce854

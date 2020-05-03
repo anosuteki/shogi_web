@@ -32,6 +32,10 @@ require 'capistrano/rails' # bundler + rails/assets + rails/migrations
 require 'capistrano/yarn'
 # require 'capistrano/sidekiq'
 
+# require 'capistrano/puma'
+# install_plugin Capistrano::Puma::Workers
+# install_plugin Capistrano::Puma
+
 require "table_format"
 require 'capistrano/maintenance'
 

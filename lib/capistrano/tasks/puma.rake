@@ -20,12 +20,21 @@
 
 # append :rbenv_map_bins, 'puma', 'pumactl'
 
+# after "deploy:restart",
+
+# cap production puma:status
+# cap production puma:restart
+# cap production puma:start
+# cap production puma:stop
+
 namespace :puma do
-  desc "cap production puma:restart"
-  after "deploy:restart", :restart do
-    on roles(:app) do
-      within current_path do
-        execute :pwd
+  [:start, :stop, :status, :restart].each do |command|
+    desc "cap production puma:#{command}"
+    task command do
+      on roles(:app) do
+        within current_path do
+          execute "sudo systemctl #{command} puma"
+        end
       end
     end
   end

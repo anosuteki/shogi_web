@@ -28,7 +28,7 @@ after "deploy:published", "sidekiq:restart"
 
 [:nginx, :puma, :sidekiq].each do |service|
   namespace service do
-    [:start, :stop, :status, :restart].each do |command|
+    [:start, :stop, :status, :restart, :reload].each do |command|
       desc "cap production #{service}:#{command}"
       task command do
         on roles(:app) do

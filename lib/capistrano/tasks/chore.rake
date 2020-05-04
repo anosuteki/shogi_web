@@ -32,32 +32,6 @@ if ENV["HTTPD_RESTART"]
 end
 
 namespace :deploy do
-
-  # desc 'Restart application'
-  # task :restart do
-  #   on roles(:app), in: :sequence, wait: 5 do
-  #     execute :touch, release_path.join('tmp/restart.txt')
-  #   end
-  # end
-  #
-  # after :publishing, :restart
-
-  # -  after "deploy:assets:precompile", :chmod_R do
-  # -    on roles(:web), in: :groups, limit: 3, wait: 10 do
-  # -      execute :chmod, "-R ug+w #{fetch(:deploy_to)}"
-  # -    end
-  # -  end
-
-  # after :restart, :clear_cache do
-  #   on roles(:web), in: :groups, limit: 3, wait: 10 do
-  #     # Here we can do anything such as:
-  #     # within release_path do
-  #     #   execute :rake, 'cache:clear'
-  #     # end
-  #   end
-  # end
-  #
-
   if true
     task :app_clean do
       on roles(:all) do

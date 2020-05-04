@@ -1,27 +1,9 @@
-# 実行タイミング
-#
-#   after 'deploy:starting',  'puma:quiet'
-#   after 'deploy:updated',   'puma:stop'
-#   after 'deploy:published', 'puma:start'
-#   after 'deploy:failed',    'puma:restart'
-#
-
 # |----------------+--------------------------------------+----------------------|
 # | コマンド       | 意味                                 | タイミング           |
 # |----------------+--------------------------------------+----------------------|
 # | kill -TSTP pid | 新規受付修正。スレッドを減らしていく | deploy:starting の前 |
 # | kill -TERM pid | 完全停止                             | deploy:updated の後  |
-# |                |                                      |                      |
 # |----------------+--------------------------------------+----------------------|
-
-# cap production puma:quiet
-
-# set_if_empty :puma_pid_path, -> { Pathname(shared_path).join("tmp/pids/puma.pid") }
-
-# cap production puma:status
-# cap production puma:restart
-# cap production puma:start
-# cap production puma:stop
 
 [:nginx, :puma, :sidekiq].each do |service|
   namespace service do

@@ -76,9 +76,6 @@ Rails.application.configure do
   # ファイルを更新したときに呼ばれる
   config.to_prepare do
     load Rails.root.join("config/app_config.rb")
-    # Rails.application.config.app_config.deep_merge!({
-    #     zip_download_function: false,
-    #   })
   end
 
   # https://qiita.com/taiteam/items/a37c60fc15c1aa5bb606
@@ -93,6 +90,6 @@ Rails.application.configure do
   config.action_cable.mount_path = "/x-cable"
 
   # ################################################################################ ActiveJob
-  config.active_job.queue_adapter     = :sidekiq
+  # config.active_job.queue_adapter     = :sidekiq
   # config.active_job.queue_name_prefix = nil
 end

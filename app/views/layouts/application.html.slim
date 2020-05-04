@@ -19,5 +19,6 @@ html(lang="ja")
 
     = yield :head
   body
-    = yield
+    .section
+      = yield
     = ToolBelt::Basic.new(view_context: self).to_html

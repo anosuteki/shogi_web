@@ -24,13 +24,8 @@ module ToolBelt
 
       out << list.to_html
 
-      out << [
-        h.link_to("sidekiq", "/admin/sidekiq"),
-        h.link_to("sidekiq", "/admin/sidekiq"),
-      ].join
-
       hash = {
-        "sidekiq管理画面"       => h.link_to("sidekiq", "/admin/sidekiq"),
+        "リンク"                => h.link_to("sidekiq", "/admin/sidekiq", :class => "button is-small"),
         "action_cable_meta_tag" => "" + h.action_cable_meta_tag,
         "Acns1::Message.count"  => Acns1::Message.count,
       }

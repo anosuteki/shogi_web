@@ -21,9 +21,5 @@ module AtomicScript
     include PageTitleMod
     include SupportMod
     include LinkMod
-    include AddParamsPrintMod
-    include VisibilityHiddenMod
-
-    # include PostRedirectMod
   end
 end

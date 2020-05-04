@@ -3,8 +3,6 @@
 # app/models/backend_script/acns1_sample_script.rb
 module BackendScript
   class Acns1SampleScript < ::BackendScript::Base
-    include AtomicScript::AddJsonLinkMod
-
     self.script_name = "チャット (acns1)"
 
     BOOT_TIME = Time.current

@@ -28,7 +28,6 @@ gem 'jbuilder', '~> 2.7'
 # Use Redis adapter to run Action Cable in production
 gem 'redis', '~> 4.0'
 gem 'redis-namespace'
-# gem 'redis', '3.3.3'
 # Use ActiveModel has_secure_password
 # gem "bcrypt", "~> 3.1.7"
 
@@ -55,9 +54,6 @@ group :development do
   gem "spring-watcher-listen", "~> 2.0.0"
 end
 
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-# gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-
 # ################################################################################
 
 group :development, :test do
@@ -69,12 +65,6 @@ group :development, :test do
   gem "capistrano-rbenv"
   gem "capistrano-yarn"
   gem "capistrano-rails-console"
-  gem "capistrano-maintenance", require: false
-  gem "capistrano3-puma"
-
-  # sidekiq を安全に止める
-  # https://qiita.com/pekepek/items/8eb302c997335fbce854
-  gem "capistrano-sidekiq"
 end
 
 group :development do
@@ -107,11 +97,3 @@ gem "bcrypt"
 
 # ActiveJob
 gem 'sidekiq'
-# gem 'sidekiq-failures'
-# gem 'sidekiq-retries'
-# gem 'sidekiq-status'
-# gem 'sidekiq-monitor-stats', require: false
-# gem 'sinatra', require: false  # sidekiq web
-
-# gem "activerecord-session_store"
-

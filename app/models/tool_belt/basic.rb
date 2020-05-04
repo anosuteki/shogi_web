@@ -15,16 +15,22 @@ module ToolBelt
         {}.tap do |row|
           row[:name] = e.name
           row["操作"] = [
-            link_to_eval("login", redirect_to: :root)    { "current_user_set_id(#{e.id})"                                                    },
-            link_to_eval("削除", redirect_to: :root)     { "Colosseum::User.find(#{e.id}).destroy!"                                          },
-            link_to_eval("logout", redirect_to: :root)   { "reset_session" if e == h.current_user                                            },
+            link_to_eval("login", redirect_to: :root)    { "current_user_set_id(#{e.id})"            },
+            link_to_eval("削除", redirect_to: :root)     { "Colosseum::User.find(#{e.id}).destroy!"  },
+            link_to_eval("logout", redirect_to: :root)   { "reset_session" if e == h.current_user    },
           ].compact.join(" ").html_safe
         end
       end
 
       out << list.to_html
 
+      out << [
+        h.link_to("sidekiq", "/admin/sidekiq"),
+        h.link_to("sidekiq", "/admin/sidekiq"),
+      ].join
+
       hash = {
+        "sidekiq管理画面"       => h.link_to("sidekiq", "/admin/sidekiq"),
         "action_cable_meta_tag" => "" + h.action_cable_meta_tag,
         "Acns1::Message.count"  => Acns1::Message.count,
       }

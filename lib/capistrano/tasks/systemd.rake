@@ -18,41 +18,39 @@
 
 # set_if_empty :puma_pid_path, -> { Pathname(shared_path).join("tmp/pids/puma.pid") }
 
-# append :rbenv_map_bins, 'puma', 'pumactl'
-
-# tmp/restart.txtをtouchするとリスタートする
-after "deploy:restart", "puma:restart"
-
 # cap production puma:status
 # cap production puma:restart
 # cap production puma:start
 # cap production puma:stop
 
-namespace :puma do
-  [:start, :stop, :status, :restart].each do |command|
-    desc "cap production puma:#{command}"
-    task command do
-      on roles(:app) do
-        within current_path do
-          execute "sudo systemctl #{command} puma"
+after "deploy:published", "puma:restart"
+after "deploy:published", "sidekiq:restart"
+
+[:nginx, :puma, :sidekiq].each do |service|
+  namespace service do
+    [:start, :stop, :status, :restart].each do |command|
+      desc "cap production #{service}:#{command}"
+      task command do
+        on roles(:app) do
+          within current_path do
+            execute :sudo, "systemctl #{command} #{service}"
+          end
         end
       end
     end
-  end
 
-  # desc "puma stop"
-  # task :quiet do
-  #   on roles(:app) do
-  #     execute "kill -TSTP `cat #{fetch(:puma_pid_path)}`; true"
-  #   end
-  # end
-  # before "deploy:updated", "puma:quiet"
-  #
-  # desc "puma kill"
-  # task :kill do
-  #   on roles(:app) do
-  #     execute "kill -TERM `cat #{fetch(:puma_pid_path)}`; true"
-  #   end
-  # end
-  # after "deploy:updated", "puma:kill"
+    desc "cap production #{service}:journal"
+    task "journal" do
+      on roles(:app) do
+        execute :journalctl, "--no-pager -u #{service} -n 30"
+      end
+    end
+
+    desc "cap production #{service}:journal:tailf"
+    task "journal:tailf" do
+      on roles(:app) do
+        execute :journalctl, "--no-pager -u #{service} -f"
+      end
+    end
+  end
 end

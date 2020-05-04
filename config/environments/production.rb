@@ -115,13 +115,14 @@ Rails.application.configure do
 
   # ################################################################################ ActionCable
   # ActionCable.server.config.disable_request_forgery_protection = true
-  config.action_cable.disable_request_forgery_protection = true
+  # config.action_cable.disable_request_forgery_protection = true
   # config.action_cable.allowed_request_origins = [/https?:\/\/.*/]
   # config.action_cable.allowed_request_origins = ["https://shogi-flow.xyz", /https:\/\/shogi-flow.xyz.*/]
   # config.action_cable.allowed_request_origins = [/http:\/\/*/, /https:\/\/*/]
   # config.action_cable.url = "wss://shogi-flow.xyz:28081"
-  config.action_cable.mount_path = "/cable2"
-  # config.action_cable.url = "wss://localhost:3000/cable2"
+  config.action_cable.allowed_request_origins = ["https://shogi-flow.xyz"]
+  config.action_cable.mount_path = "/x-cable"
+  # config.action_cable.url = "wss://localhost:3000/x-cable"
   # config.web_console.whitelisted_ips = '0.0.0.0/0'
 
   # ################################################################################ ActiveStorage

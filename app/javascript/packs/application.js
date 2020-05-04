@@ -15,16 +15,14 @@ require("channels")
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 
+////////////////////////////////////////////////////////////////////////////////
+
+import 'bulma/css/bulma.css'
+
 //////////////////////////////////////////////////////////////////////////////// Vue
 
 import Vue from "vue/dist/vue.esm" // esm版はvueのtemplateをパースできる
 window.Vue = Vue
-
-import Vuex from "vuex"
-Vue.use(Vuex)                   // これは一箇所だけで実行すること。shogi-player 側で実行すると干渉する
-
-import VueRouter from "vue-router"
-Vue.use(VueRouter)
 
 //////////////////////////////////////////////////////////////////////////////// lodash
 
@@ -33,22 +31,10 @@ window._ = _
 
 import vue_actioncable from "support/vue_actioncable.js"
 
-//////////////////////////////////////////////////////////////////////////////// Chart.js
-
-////////////////////////////////////////////////////////////////////////////////
-
-//////////////////////////////////////////////////////////////////////////////// タブがアクティブか？(見えているか？)
-
-//////////////////////////////////////////////////////////////////////////////// どこからでも使いたい
-
-//////////////////////////////////////////////////////////////////////////////// どこからでも使いたい2
-
 import acns1_sample from "acns1_sample.vue"
 import debug_print from "components/debug_print.vue"
 
 Vue.mixin({
-  router: new VueRouter({mode: "history"}),
-
   mixins: [
     vue_actioncable,
   ],
@@ -60,20 +46,4 @@ Vue.mixin({
   },
 })
 
-window.GVI = new Vue()           // ActionCable 側から Vue のグローバルなメソッドを呼ぶため
-
 // import ActionCable from "actioncable"
-
-// このような書き方でいいのかどうかはわからない
-window.App = {}
-// document.addEventListener('DOMContentLoaded', () => {
-//   console.log(window.Vue)
-//   console.log(window.GVI)
-// })
-// if (GVI.$route) {
-//   if (GVI.$route.path.includes("/colosseum/battles")) {
-//     window.App.cable = ActionCable.createConsumer()
-//     ActionCable.startDebugging()
-//   }
-// }
-// import "action_cable_setup.js"

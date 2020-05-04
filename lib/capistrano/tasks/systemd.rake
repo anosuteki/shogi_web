@@ -23,9 +23,6 @@
 # cap production puma:start
 # cap production puma:stop
 
-after "deploy:published", "puma:restart"
-after "deploy:published", "sidekiq:restart"
-
 [:nginx, :puma, :sidekiq].each do |service|
   namespace service do
     [:start, :stop, :status, :restart, :reload].each do |command|

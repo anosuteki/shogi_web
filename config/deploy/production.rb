@@ -24,6 +24,9 @@ before 'deploy:check:linked_files', 'deploy:database_yml_upload'
 # さくらサーバーの容量がないため yarn のパッケージのキャッシュはクリアする (そもそもサーバー側でビルドしてない)
 # after "deploy:finished", :yarn_cache_clean
 
+after "deploy:published", "puma:restart"
+after "deploy:published", "sidekiq:restart"
+
 # 起動確認
 set :my_heartbeat_urls, ["https://shogi-flow.xyz/"]
 

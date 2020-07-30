@@ -3,6 +3,8 @@
   .messages_box(ref="messages_box")
     .message_line(v-for="message in app.lobby_messages")
       message_row(:message="message")
+      //- number_link(:body="message.body")
+      //- render(method="render1" :args="'message'")
   .input_field.is-flex.mt-2(v-if="app.current_user")
     figure.media-left.is_clickable.ml-2.mr-0(@click="app.ov_user_info_set(app.current_user.id)")
       p.image.is-32x32.avatar_image
@@ -17,11 +19,13 @@
 <script>
 import { support } from "./support.js"
 import message_row from "./components/message_row.vue"
+// import number_link from "./components/number_link.vue"
 
 export default {
   name: "the_lobby",
   components: {
     message_row,
+    // number_link,
   },
   mixins: [
     support,
@@ -32,6 +36,11 @@ export default {
         this.scroll_to_bottom(this.$refs.messages_box)
       },
     },
+  },
+  methods: {
+    // render1(arg) {
+    //   return "foo"
+    // },
   },
 }
 </script>

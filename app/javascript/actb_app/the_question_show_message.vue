@@ -11,7 +11,7 @@
             strong.is_clickable(@click="app.ov_user_info_set(message.user.id)")
               | {{message.user.name}}
             br
-            span(v-html="message_decorate(message.body)")
+            number_link(:body="message.body")
             br
             template(v-if="false")
               small
@@ -47,9 +47,13 @@
 
 <script>
 import { support } from "./support.js"
+import number_link from "./components/number_link.vue"
 
 export default {
   name: "the_question_show_message",
+  components: {
+    number_link,
+  },
   mixins: [
     support,
   ],

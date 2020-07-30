@@ -61,7 +61,7 @@ export const support = {
     message_decorate(str) {
       str = this.auto_link(str)
       str = this.simple_format(str)
-      str = this.number_replace_to_question_link(str)
+      // str = this.number_replace_to_question_link(str)
       return str
     },
 

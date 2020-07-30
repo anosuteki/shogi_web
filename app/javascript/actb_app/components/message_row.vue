@@ -5,18 +5,22 @@
   .user_name.has-text-grey.is-size-7.is_clickable.has-text-weight-bold(@click="app.ov_user_info_set(message.user.id)")
     | {{message.user.name}}
   .message_body.is-size-7.is_line_break_on
-    span(v-html="message_decorate(message_body)" :class="{'has-text-primary': system_message_p, 'has-text-danger': debug_message_p}")
+    number_link(:body="message_body" :class="{'has-text-primary': system_message_p, 'has-text-danger': debug_message_p}")
     span.diff_time_format.is-size-11.has-text-grey-light.ml-1.is_line_break_off
       | {{diff_time_format(message.created_at)}}
 </template>
 
 <script>
 import { support } from "../support.js"
+import number_link from "./number_link.vue"
 
 export default {
   name: "message_row",
   props: {
     message: { type: Object, required: true, },
+  },
+  components: {
+    number_link,
   },
   mixins: [
     support,

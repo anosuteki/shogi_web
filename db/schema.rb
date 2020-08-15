@@ -94,7 +94,7 @@ ActiveRecord::Schema.define(version: 2020_07_25_112115) do
     t.bigint "category_id", null: false
     t.string "name", null: false
     t.string "message", null: false
-    t.string "say", null: false
+    t.string "voice", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["category_id"], name: "index_actb_emotions_on_category_id"

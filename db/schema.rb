@@ -89,15 +89,23 @@ ActiveRecord::Schema.define(version: 2020_07_25_112115) do
     t.index ["position"], name: "index_actb_emotion_categories_on_position"
   end
 
+  create_table "actb_emotion_folders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
+    t.string "key", null: false
+    t.integer "position", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["position"], name: "index_actb_emotion_folders_on_position"
+  end
+
   create_table "actb_emotions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.bigint "category_id", null: false
+    t.bigint "folder_id", null: false
     t.string "name", null: false
     t.string "message", null: false
     t.string "voice", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["category_id"], name: "index_actb_emotions_on_category_id"
+    t.index ["folder_id"], name: "index_actb_emotions_on_folder_id"
     t.index ["user_id"], name: "index_actb_emotions_on_user_id"
   end
 
@@ -742,7 +750,7 @@ ActiveRecord::Schema.define(version: 2020_07_25_112115) do
   add_foreign_key "actb_battles", "actb_rules", column: "rule_id"
   add_foreign_key "actb_clip_marks", "actb_questions", column: "question_id"
   add_foreign_key "actb_clip_marks", "users"
-  add_foreign_key "actb_emotions", "actb_emotion_categories", column: "category_id"
+  add_foreign_key "actb_emotions", "actb_emotion_folders", column: "folder_id"
   add_foreign_key "actb_emotions", "users"
   add_foreign_key "actb_folders", "users"
   add_foreign_key "actb_good_marks", "actb_questions", column: "question_id"

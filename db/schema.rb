@@ -98,14 +98,16 @@ ActiveRecord::Schema.define(version: 2020_07_25_112115) do
   end
 
   create_table "actb_emotions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "folder_id", null: false
-    t.string "name", null: false
-    t.string "message", null: false
-    t.string "voice", null: false
+    t.bigint "user_id", null: false, comment: "所有者"
+    t.bigint "folder_id", null: false, comment: "フォルダ"
+    t.string "name", null: false, comment: "トリガー名"
+    t.string "message", null: false, comment: "表示用伝言"
+    t.string "voice", null: false, comment: "発声用文言"
+    t.integer "position", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["folder_id"], name: "index_actb_emotions_on_folder_id"
+    t.index ["position"], name: "index_actb_emotions_on_position"
     t.index ["user_id"], name: "index_actb_emotions_on_user_id"
   end
 
